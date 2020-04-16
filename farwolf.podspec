@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://weexplus.github.io/doc/"
   s.license      = "MIT"
   s.author             = { "zjr" => "362675035@qq.com" }
-  s.source       = { :git => "", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/farwolf2010/farwolf.git", :tag => "1.0.1" }
   s.source_files  = "Source", "farwolf/**/*.{h,m}"
   s.exclude_files = "Source/Exclude"
   s.platform     = :ios, "8.0"
