@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
  
 
   s.name         = "farwolf"
-  s.version      = "0.0.1"
+  s.version      = "1.0.2"
   s.summary      = "weexplus基础库."
   s.description  = <<-DESC
                     Handle the data.
@@ -14,13 +14,13 @@ Pod::Spec.new do |s|
   s.homepage     = "https://weexplus.github.io/doc/"
   s.license      = "MIT"
   s.author             = { "zjr" => "362675035@qq.com" }
-  s.source       = { :git => "https://github.com/farwolf2010/farwolf.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/farwolf2010/farwolf.git", :tag => "1.0.2" }
   s.source_files  = "Source", "farwolf/**/*.{h,m}"
   s.exclude_files = "Source/Exclude"
   s.platform     = :ios, "8.0"
 
   s.dependency 'MBProgressHUD', '~> 0.9.2'
-  s.dependency 'YYModel'
+  s.dependency 'YYModel', '~> 1.0.4'
   s.dependency  "AFNetworking", "~>3.2.1"
   s.dependency 'Masonry', '~> 0.6.3'
   s.dependency 'SDWebImage', '~> 5.1.0'
