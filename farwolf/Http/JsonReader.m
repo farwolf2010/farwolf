@@ -92,25 +92,7 @@
         }
     }
     
-    
-//   AFHTTPRequestOperation* req= [manager POST:url parameters:p constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//
-//        NSArray *nx= f.allKeys;
-//
-//        for(NSString *key in nx)
-//        {
-//            NSObject *o= p[key];
-//            NSData *data = UIImagePNGRepresentation((UIImage*)o);
-//            [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
-//        }
-//
-//    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//
-//    }];
-//    return req;
-    NSURLSessionDataTask *task= [manager POST:url parameters:self.param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionDataTask *task= [manager POST:url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSArray *nx= f.allKeys;
         for(NSString *key in nx)
         {
@@ -130,7 +112,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+         
     }];
     return task;
     
@@ -252,28 +234,14 @@
     __weak typeof (self)weakSlef=self;
     if(usePost)
     {
-//       return [manager POST:url parameters:self.param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//            //        [self success:operation responseObject: start:start success:success fail:fail exception:exception compelete:compelete];
-//            [weakSlef success:operation responseObject:responseObject start:start success:success fail:fail exception:exception compelete:compelete];
-//
-//
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"失败");
-//            NSLog(@"%@", error.userInfo[@"NSLocalizedDescription"]);
-//
-//            exception();
-//            compelete();
-//
-//        }];
-        return [manager POST:url parameters:self.param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            
+        [manager POST:url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+             
         } progress:^(NSProgress * _Nonnull uploadProgress) {
-            
+             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [self success:task responseObject:responseObject start:start success:success fail:fail exception:exception compelete:compelete];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+             
         }];
     }
     else
@@ -287,21 +255,9 @@
 //            value = [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [temp setValue:value forKey:key];
         }
-//       return [manager GET:url parameters:temp success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//            //        [self success:operation responseObject: start:start success:success fail:fail exception:exception compelete:compelete];
-//            [weakSlef success:operation responseObject:responseObject start:start success:success fail:fail exception:exception compelete:compelete];
-//
-//
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"失败");
-//            NSLog(@"%@", error.userInfo[@"NSLocalizedDescription"]);
-//
-//            exception();
-//            compelete();
-//
-//        }];
-        return [manager GET:url parameters:self.param progress:^(NSProgress * _Nonnull downloadProgress) {
+       return [manager POST:url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [self success:task responseObject:responseObject start:start success:success fail:fail exception:exception compelete:compelete];
@@ -361,7 +317,7 @@
     
     if(usePost)
     {
-        return [manager POST:url parameters:self.param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manager POST:self.url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             
@@ -381,14 +337,12 @@
             res.backString=result;
             success(res);
             compelete();
-            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"失败");
             NSLog(@"%@", error.userInfo[@"NSLocalizedDescription"]);
             exception();
             compelete();
         }];
- 
     }
     else
     {
@@ -401,8 +355,8 @@
             //            t = [t stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [temp setValue:t forKey:key];
         }
-        return [manager GET:url parameters:self.param progress:^(NSProgress * _Nonnull downloadProgress) {
-            
+        return [manager GET:url parameters:self.param headers:self.header progress:^(NSProgress * _Nonnull downloadProgress) {
+             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
             NSDictionary *fields= [response allHeaderFields];
@@ -423,8 +377,7 @@
             NSLog(@"%@", error.userInfo[@"NSLocalizedDescription"]);
             exception();
             compelete();
-        }];
-        
+        }];  
  
     }
     
