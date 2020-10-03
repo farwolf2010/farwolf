@@ -234,7 +234,7 @@
     __weak typeof (self)weakSlef=self;
     if(usePost)
     {
-        [manager POST:url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+       return [manager POST:url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
              
         } progress:^(NSProgress * _Nonnull uploadProgress) {
              
@@ -317,7 +317,7 @@
     
     if(usePost)
     {
-        [manager POST:self.url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        return [manager POST:self.url parameters:self.param headers:self.header constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             
